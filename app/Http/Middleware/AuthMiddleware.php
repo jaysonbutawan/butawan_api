@@ -20,7 +20,7 @@ class AuthMiddleware
     {
         
         if (!Auth::check()) {
-            return response()->json(['message' => 'Unauthorized'], 401);
+            return response()->json(['message' => 'Unauthorized access'], 401);
         }
 
         Log::info('Incoming request to: ' . $request->getRequestUri());

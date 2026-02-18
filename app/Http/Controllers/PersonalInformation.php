@@ -14,18 +14,18 @@ class PersonalInformation extends Controller
 
         $bioData = [
             'personal' => [
-                'fullName' => 'Juan Dela Cruz',
-                'dateOfBirth' => '2003-01-01',
-                'age' => 23,
+                'fullName' => 'Jayson Butawan Magdadaro',
+                'dateOfBirth' => '2002-02-05',
+                'age' => 17,
                 'gender' => 'Male',
                 'nationality' => 'Filipino',
-                'civilStatus' => 'Single',
-                'address' => 'Manila, Philippines',
-                'contactNumber' => '09123456789',
-                'emailAddress' => 'juan@email.com',
+                'civilStatus' => 'Complicated',
+                'address' => 'Tagum City, Philippines',
+                'contactNumber' => '093574400148',
+                'emailAddress' => 'jaysonbutawan2@gmail.com',
             ],
             'objective' => [
-                'careerObjective' => 'To obtain a challenging position where I can apply my skills in software development and grow professionally.',
+                'careerObjective' => 'Failure is an event not a personal.',
             ],
             'education' => [
                 [
@@ -42,7 +42,7 @@ class PersonalInformation extends Controller
             'work' => [
                 [
                     'jobTitle' => 'Student fullstack Developer',
-                    'companyName' => 'SOCIAL MEDIA APP',
+                    'companyName' => 'Work at crusty crab',
                     'duration' => ['from' => '2017', 'to' => '2035'],
                     'keyResponsibilities' => [
                         'Developed Flutter applications and integrated Node.js backend services',
@@ -82,7 +82,7 @@ class PersonalInformation extends Controller
 
         if (count($requestedValid) === 0) {
             return response()->json([
-                'message' => 'Invalid sections parameter.',
+                'message' => 'Invalid route parameter.',
                 'allowedSections' => $allSections,
                 'example' => '/api/biodata?sections=personal,objective,education',
             ], 400);

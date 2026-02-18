@@ -82,9 +82,7 @@ class PersonalInformation extends Controller
 
         if (count($requestedValid) === 0) {
             return response()->json([
-                'message' => 'Invalid route parameter.',
-                'allowedSections' => $allSections,
-                'example' => '/api/biodata?sections=personal,objective,education',
+                'message' => 'Invalid route parameter.'
             ], 400);
         }
 

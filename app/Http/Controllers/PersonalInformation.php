@@ -92,7 +92,6 @@ class PersonalInformation extends Controller
         }
 
         return response()->json([
-            'requestedSections' => $requestedValid,
             'data' => $filtered,
         ], 200);
     }

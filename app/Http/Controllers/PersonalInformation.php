@@ -52,7 +52,7 @@ class PersonalInformation extends Controller
             ],
             'skills' => [
                 'programming' => ['Flutter', 'Angular', 'Node.js', 'Express','Laravel'],
-                'database' => ['PostgreSQL', 'SQLite','MySQL'],
+                'database' => ['PostgreSQL', 'MySQL'],
                 'softSkills' => ['Communication', 'Teamwork'],
             ],
             'certifications' => [

@@ -44,7 +44,7 @@ class PersonalInformation extends Controller
             'work' => [
                 [
                     'JobTitle: Student fullstack Developer',
-                    'companyName: Work at crusty crab',
+                    'CompanyName: Work at crusty crab',
                     'duration' => ['from' => '2017', 'to' => '2035'],
                     'keyResponsibilities' => [
                         'Developed Flutter applications and integrated Node.js backend services',

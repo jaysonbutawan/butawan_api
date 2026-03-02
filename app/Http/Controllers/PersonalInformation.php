@@ -14,35 +14,37 @@ class PersonalInformation extends Controller
 
         $bioData = [
             'personal' => [
-                'fullName' => 'Jayson Butawan Magdadaro',
-                'dateOfBirth' => '2002-02-05',
-                'age' => 17,
-                'gender' => 'Male',
-                'nationality' => 'Filipino',
-                'civilStatus' => 'Complicated',
-                'address' => 'Tagum City, Philippines',
-                'contactNumber' => '093574400148',
-                'emailAddress' => 'jaysonbutawan2@gmail.com',
+                'FullName: Jayson Butawan Magdadaro',
+                'DateOfBirth: 2002-02-05',
+                'Age: 17',
+                'Gender: Male',
+                'Nationality: Filipino',
+                'CivilStatus: Complicated',
+                'Address: Tagum City, Philippines',
+                'ContactNumber: 093574400148',
+                'EmailAddress: jaysonbutawan2@gmail.com',
             ],
             'objective' => [
-                'careerObjective' => 'Failure is an event not a personal.',
+                'Failure is an event not a personal.',
+                'No pain no gain.',
+                'The only way to do great work is to love what you do.',
             ],
             'education' => [
                 [
-                    'degreeOrCourse' => 'Bachelor of Science in Information Technology',
-                    'schoolName' => 'ACES TAGUM COLLEGE',
-                    'yearGraduated' => 2027,
+                    'DegreeOrCourse: Bachelor of Science in Information Technology',
+                    'schoolName: ACES TAGUM COLLEGE',
+                    'yearGraduated: 2027',
                 ],
                 [
-                    'degreeOrCourse' => 'Senior High School',
-                    'schoolName' => 'KNHS',
-                    'yearGraduated' => 2023,
+                    'degreeOrCourse: Senior High School',
+                    'schoolName: KNHS',
+                    'yearGraduated: 2023',
                 ],
             ],
             'work' => [
                 [
-                    'jobTitle' => 'Student fullstack Developer',
-                    'companyName' => 'Work at crusty crab',
+                    'JobTitle: Student fullstack Developer',
+                    'companyName: Work at crusty crab',
                     'duration' => ['from' => '2017', 'to' => '2035'],
                     'keyResponsibilities' => [
                         'Developed Flutter applications and integrated Node.js backend services',
@@ -51,28 +53,22 @@ class PersonalInformation extends Controller
                 ],
             ],
             'skills' => [
-                'programming' => ['Flutter', 'Angular', 'Node.js', 'Express','Laravel'],
-                'database' => ['PostgreSQL', 'MySQL'],
-                'softSkills' => ['Communication', 'Teamwork'],
+                'Programming: Flutter, Angular, Node.js, Express, Laravel',
+                'Database: PostgreSQL, MySQL',
+                'Soft Skills: Communication, Teamwork',
             ],
             'certifications' => [
                 [
-                    'title' => 'Flutter & Dart - The Complete Guide',
-                    'provider' => 'Udemy',
-                    'year' => 2025,
+                    'title: Flutter & Dart - The Complete Guide',
+                    'provider: Udemy',
+                    'year: 2025',
                 ],
             ],
         ];
 
         $sectionsParam = $request->query('sections');
 
-        if (!$sectionsParam) {
-            return response()->json([
-                'requestedSections' => $allSections,
-                'data' => $bioData,
-            ], 200);
-        }
-
+       
         $requested = array_filter(array_map(
             fn ($s) => strtolower(trim($s)),
             explode(',', $sectionsParam)
@@ -92,7 +88,7 @@ class PersonalInformation extends Controller
         }
 
         return response()->json([
-            'data' => $filtered,
+            'Butawan Jayson Bio Data' => $filtered,
         ], 200);
     }
 }

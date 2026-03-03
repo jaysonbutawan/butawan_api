@@ -2,17 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 class PersonalInformation extends Controller
 {
+    private array $allSections = ['personal', 'objective', 'education', 'work', 'skills', 'certifications'];
 
-    public function index(Request $request)
+    private function bioData(): array
     {
-        $allSections = ['personal', 'objective', 'education', 'work', 'skills', 'certifications'];
-
-        $bioData = [
+        return [
             'personal' => [
                 'FullName: Jayson Butawan Magdadaro',
                 'DateOfBirth: 2002-02-05',
@@ -65,21 +63,28 @@ class PersonalInformation extends Controller
                 ],
             ],
         ];
+    }
+
+    public function index(Request $request)
+    {
+        $bioData = $this->bioData();
 
         $sectionsParam = $request->query('sections');
+        if (!$sectionsParam) {
+            return response()->json([
+                'Butawan Jayson Bio Data' => $bioData,
+            ], 200);
+        }
 
-       
         $requested = array_filter(array_map(
-            fn ($s) => strtolower(trim($s)),
+            fn($s) => strtolower(trim($s)),
             explode(',', $sectionsParam)
         ));
 
-        $requestedValid = array_values(array_intersect($requested, $allSections));
+        $requestedValid = array_values(array_intersect($requested, $this->allSections));
 
         if (count($requestedValid) === 0) {
-            return response()->json([
-                'message' => 'Invalid route parameter.'
-            ], 400);
+            return response()->json(['message' => 'Invalid sections parameter.'], 400);
         }
 
         $filtered = [];
@@ -89,6 +94,25 @@ class PersonalInformation extends Controller
 
         return response()->json([
             'Butawan Jayson Bio Data' => $filtered,
+        ], 200);
+    }
+
+    public function show(string $section)
+    {
+        $section = strtolower(trim($section));
+
+        if (!in_array($section, $this->allSections, true)) {
+            return response()->json([
+                'message' => 'Invalid route parameter. Valid: ' . implode(', ', $this->allSections),
+            ], 400);
+        }
+
+        $bioData = $this->bioData();
+
+        return response()->json([
+            'Butawan Jayson Bio Data' => [
+                $section => $bioData[$section],
+            ],
         ], 200);
     }
 }

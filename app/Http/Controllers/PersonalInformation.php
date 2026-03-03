@@ -29,12 +29,12 @@ class PersonalInformation extends Controller
             ],
             'education' => [
                 [
-                    'DegreeOrCourse: Bachelor of Science in Information Technology',
+                    'Course: Bachelor of Science in Information Technology',
                     'schoolName: ACES TAGUM COLLEGE',
                     'yearGraduated: 2027',
                 ],
                 [
-                    'degreeOrCourse: Senior High School',
+                    'Course: Senior High School',
                     'schoolName: KNHS',
                     'yearGraduated: 2023',
                 ],

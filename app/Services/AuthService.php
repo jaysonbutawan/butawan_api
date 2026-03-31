@@ -5,9 +5,10 @@ use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 
+
 class AuthService
 {
-    public function login(array $credentials): string
+   public function login(array $credentials): array
     {
         $user = User::where('email', $credentials['email'])->first();
 
@@ -17,14 +18,20 @@ class AuthService
             ]);
         }
 
-        // Return a plain text token for the Angular app to store
-        return $user->createToken('admin-token')->plainTextToken;
+        // Generate the token
+        $token = $user->createToken('admin-token')->plainTextToken;
+
+        // Return both the token and the user object
+        return [
+            'token' => $token,
+            'user' => $user
+        ];
     }
 
     public function logout(User $user): void
     {
         // Revoke the current token being used
-        $user->currentAccessToken()->delete();
+        $user->currentAccessToken()->delete;
     }
 
     public function updatePassword(User $user, string $newPassword): bool

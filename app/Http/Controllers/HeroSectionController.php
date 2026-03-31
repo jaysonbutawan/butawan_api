@@ -10,7 +10,7 @@ use Illuminate\Http\JsonResponse;
 
 class HeroSectionController extends Controller
 {
-public function __construct(
+    public function __construct(
         protected HeroSectionService $service
     ) {}
 
@@ -26,20 +26,18 @@ public function __construct(
     /**
      * Update the hero data (from your admin dashboard)
      */
+    // HeroSectionController.php
     public function update(Request $request): JsonResponse
     {
         $validated = $request->validate([
-            'availability_text' => 'string',
-            'is_available'      => 'boolean',
-            'first_name'        => 'required|string',
-            'last_name'         => 'required|string',
-            'role_prefix'       => 'string',
-            'role_highlight'    => 'required|string',
-            'description'       => 'required|string',
+            'name' => 'nullable|string|max:255',
+            'role' => 'nullable|string|max:255',
+            'summary' => 'nullable|string',
+            'status_badge' => 'nullable|string|max:255',
         ]);
 
         $hero = $this->service->updateHero($validated);
+
         return response()->json($hero);
     }
 }
-

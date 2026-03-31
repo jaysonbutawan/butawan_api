@@ -15,11 +15,11 @@ Route::prefix('butawan')->group(function () {
 
 
     Route::prefix('auth')->name('auth.')->group(function () {
-        Route::post('/login', [AuthController::class, 'login']);
+        Route::post('/login', [AuthController::class, 'login'])->name('login');
 
         Route::middleware('auth:sanctum')->group(function () {
-            Route::post('/logout', [\App\Http\Controllers\AuthController::class, 'logout']);
-            Route::post('/change-password', [\App\Http\Controllers\AuthController::class, 'changePassword']);
+            Route::post('/logout', [\App\Http\Controllers\AuthController::class, 'logout'])->name('logout');
+            Route::post('/change-password', [\App\Http\Controllers\AuthController::class, 'changePassword'])->name('change-password');
         });
     });
 

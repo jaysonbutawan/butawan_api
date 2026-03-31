@@ -10,13 +10,10 @@ class HeroSection extends Model
    use HasFactory;
 
     protected $fillable = [
-        'availability_text',
-        'is_available',
-        'first_name',
-        'last_name',
-        'role_prefix',
-        'role_highlight',
-        'description'
+        'name',
+        'role',
+        'summary',
+        'status_badge'
     ];
 
     protected $casts = [

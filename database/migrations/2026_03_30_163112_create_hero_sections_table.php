@@ -15,19 +15,11 @@ return new class extends Migration
             $table->id();
 
             // Availability Badge
-            $table->string('availability_text')->default('Available for opportunities');
-            $table->boolean('is_available')->default(true); // To toggle the pulse dot
+            $table->string('name');
+            $table->string('role');
+            $table->string('summary');
+            $table->string('status_badge');
 
-            // Name and Surname
-            $table->string('first_name')->default('Jayson');
-            $table->string('last_name')->default('Butawan');
-
-            // Role and Highlight
-            $table->string('role_prefix')->default('Creative');
-            $table->string('role_highlight')->default('Full-Stack Developer');
-
-            // Bio Description
-            $table->text('description');
 
             $table->timestamps();
         });

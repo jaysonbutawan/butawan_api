@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('contacts', function (Blueprint $table) {
             $table->id();
-            $table->string('icon');      // e.g., '✉️' or 'pi pi-envelope'
-            $table->string('label');     // e.g., 'Email'
-            $table->string('value');     // e.g., 'jaysonbutawan2@gmail.com'
-            $table->string('href');      // e.g., 'mailto:...' or 'https://...'
+            $table->string('icon')->nullable();      // e.g., '✉️' or 'pi pi-envelope'
+            $table->string('label')->nullable();     // e.g., 'Email'
+            $table->string('value')->nullable();     // e.g., 'jaysonbutawan2@gmail.com'
+            $table->string('href')->nullable();      // e.g., 'mailto:...' or 'https://...'
 
             $table->integer('order')->default(0); // To keep Email/Phone at the top
             $table->timestamps();

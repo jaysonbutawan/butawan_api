@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('about_details_cards', function (Blueprint $table) {
             $table->id();
-            $table->string('label');
-            $table->string('value');
+            $table->string('label')->nullable();
+            $table->string('value')->nullable();
         });
     }
 

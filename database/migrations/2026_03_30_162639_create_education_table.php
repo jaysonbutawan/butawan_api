@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::create('education', function (Blueprint $table) {
             $table->id();
-            $table->string('year');      // e.g., '2023 — Present'
-            $table->string('degree');    // e.g., 'BS in Information Technology'
-            $table->string('school');    // e.g., 'Aces Tagum College'
+            $table->string('year')->nullable();      // e.g., '2023 — Present'
+            $table->string('degree')->nullable();    // e.g., 'BS in Information Technology'
+            $table->string('school')->nullable();    // e.g., 'Aces Tagum College'
             $table->text('note')->nullable();
-            $table->string('icon')->default('🎓');
+            $table->string('icon')->nullable();      // e.g., '🎓' or 'pi pi-graduation-cap'
 
             $table->integer('order')->default(0); // For custom sorting
             $table->timestamps();

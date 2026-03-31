@@ -15,10 +15,10 @@ return new class extends Migration
             $table->id();
 
             // Availability Badge
-            $table->string('name');
-            $table->string('role');
-            $table->string('summary');
-            $table->string('status_badge');
+            $table->string('name')->nullable();
+            $table->string('role')->nullable();
+            $table->string('summary')->nullable();
+            $table->string('status_badge')->nullable();
 
 
             $table->timestamps();

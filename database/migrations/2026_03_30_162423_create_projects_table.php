@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::create('projects', function (Blueprint $table) {
             $table->id();
-            $table->string('icon');        // Emoji or Icon class
-            $table->string('type');        // e.g., 'Web Application'
-            $table->string('title');
-            $table->text('description');
-            $table->json('stack');         // Array: ['Angular', 'Laravel', etc.]
+            $table->string('icon')->nullable();        // Emoji or Icon class
+            $table->string('type')->nullable();        // e.g., 'Web Application'
+            $table->string('title')->nullable();
+            $table->text('description')->nullable();
+            $table->json('stack')->nullable();         // Array: ['Angular', 'Laravel', etc.]
 
             // Optional but recommended: Add a link for "Live Demo" or "GitHub"
             $table->string('link')->nullable();

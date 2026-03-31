@@ -5,62 +5,41 @@ namespace App\Http\Controllers;
 use App\Models\HeroSection;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Services\HeroSectionService;
+use Illuminate\Http\JsonResponse;
 
 class HeroSectionController extends Controller
 {
+public function __construct(
+        protected HeroSectionService $service
+    ) {}
+
     /**
-     * Display a listing of the resource.
+     * Get the hero data for your Angular frontend
      */
-    public function index()
+    public function index(): JsonResponse
     {
-        //
+        $hero = $this->service->getHero();
+        return response()->json($hero);
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Update the hero data (from your admin dashboard)
      */
-    public function create()
+    public function update(Request $request): JsonResponse
     {
-        //
-    }
+        $validated = $request->validate([
+            'availability_text' => 'string',
+            'is_available'      => 'boolean',
+            'first_name'        => 'required|string',
+            'last_name'         => 'required|string',
+            'role_prefix'       => 'string',
+            'role_highlight'    => 'required|string',
+            'description'       => 'required|string',
+        ]);
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(HeroSection $heroSection)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(HeroSection $heroSection)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, HeroSection $heroSection)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(HeroSection $heroSection)
-    {
-        //
+        $hero = $this->service->updateHero($validated);
+        return response()->json($hero);
     }
 }
+

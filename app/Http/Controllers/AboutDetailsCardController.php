@@ -5,62 +5,45 @@ namespace App\Http\Controllers;
 use App\Models\AboutDetailsCard;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Services\AboutDetailsCardService;
+use Illuminate\Http\JsonResponse;
 
 class AboutDetailsCardController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+  public function __construct(
+        protected AboutDetailsCardService $service
+    ) {}
+
+    public function index(): JsonResponse
     {
-        //
+        return response()->json($this->service->getAllCards());
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function store(Request $request): JsonResponse
     {
-        //
+        $validated = $request->validate([
+            'label' => 'required|string',
+            'value' => 'required|string',
+        ]);
+
+        $card = $this->service->createCard($validated);
+        return response()->json($card, 201);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function update(Request $request, AboutDetailsCard $aboutDetailsCard): JsonResponse
     {
-        //
+        $validated = $request->validate([
+            'label' => 'string',
+            'value' => 'string',
+        ]);
+
+        $this->service->updateCard($aboutDetailsCard, $validated);
+        return response()->json($aboutDetailsCard);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(AboutDetailsCard $aboutDetailsCard)
+    public function destroy(AboutDetailsCard $aboutDetailsCard): JsonResponse
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(AboutDetailsCard $aboutDetailsCard)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, AboutDetailsCard $aboutDetailsCard)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(AboutDetailsCard $aboutDetailsCard)
-    {
-        //
+        $this->service->deleteCard($aboutDetailsCard);
+        return response()->json(['message' => 'Card removed']);
     }
 }

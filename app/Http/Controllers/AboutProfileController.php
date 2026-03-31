@@ -2,65 +2,40 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\AboutProfile;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Services\AboutProfileService;
+use Illuminate\Http\JsonResponse;
 
 class AboutProfileController extends Controller
 {
+   public function __construct(
+        protected AboutProfileService $service
+    ) {}
+
     /**
-     * Display a listing of the resource.
+     * Display the profile for the Angular frontend.
      */
-    public function index()
+    public function index(): JsonResponse
     {
-        //
+        $profile = $this->service->getProfile();
+        return response()->json($profile);
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Update the profile (for your admin dashboard).
      */
-    public function create()
+    public function update(Request $request): JsonResponse
     {
-        //
-    }
+        $validated = $request->validate([
+            'section_label'      => 'string',
+            'heading_main'       => 'required|string',
+            'heading_highlight'  => 'required|string',
+            'description_top'    => 'required|string',
+            'description_bottom' => 'required|string',
+        ]);
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(AboutProfile $aboutProfile)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(AboutProfile $aboutProfile)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, AboutProfile $aboutProfile)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(AboutProfile $aboutProfile)
-    {
-        //
+        $profile = $this->service->updateProfile($validated);
+        return response()->json($profile);
     }
 }

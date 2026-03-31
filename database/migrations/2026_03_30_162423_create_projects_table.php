@@ -18,7 +18,6 @@ return new class extends Migration
             $table->string('title');
             $table->text('description');
             $table->json('stack');         // Array: ['Angular', 'Laravel', etc.]
-            $table->string('gradient');    // Tailwind gradient string
 
             // Optional but recommended: Add a link for "Live Demo" or "GitHub"
             $table->string('link')->nullable();

@@ -5,62 +5,51 @@ namespace App\Http\Controllers;
 use App\Models\Contact;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Services\ContactService;
+use Illuminate\Http\JsonResponse;
 
 class ContactController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+   public function __construct(
+        protected ContactService $service
+    ) {}
+
+    public function index(): JsonResponse
     {
-        //
+        return response()->json($this->service->getAll());
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function store(Request $request): JsonResponse
     {
-        //
+        $validated = $request->validate([
+            'icon'  => 'required|string',
+            'label' => 'required|string',
+            'value' => 'required|string',
+            'href'  => 'required|string',
+            'order' => 'integer'
+        ]);
+
+        $contact = $this->service->create($validated);
+        return response()->json($contact, 201);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function update(Request $request, Contact $contact): JsonResponse
     {
-        //
+        $validated = $request->validate([
+            'icon'  => 'string',
+            'label' => 'string',
+            'value' => 'string',
+            'href'  => 'string',
+            'order' => 'integer'
+        ]);
+
+        $this->service->update($contact, $validated);
+        return response()->json($contact);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Contact $contact)
+    public function destroy(Contact $contact): JsonResponse
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Contact $contact)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Contact $contact)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Contact $contact)
-    {
-        //
+        $this->service->delete($contact);
+        return response()->json(['message' => 'Contact link removed']);
     }
 }

@@ -5,62 +5,53 @@ namespace App\Http\Controllers;
 use App\Models\Experience;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Services\ExperienceService;
+use Illuminate\Http\JsonResponse;
 
 class ExperienceController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function __construct(
+        protected ExperienceService $service
+    ) {}
+
+    public function index(): JsonResponse
     {
-        //
+        return response()->json($this->service->getAll());
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function store(Request $request): JsonResponse
     {
-        //
+        $validated = $request->validate([
+            'date'        => 'required|string',
+            'role'        => 'required|string',
+            'company'     => 'nullable|string',
+            'description' => 'nullable|string',
+            'tech'        => 'nullable|array', // Laravel validates this as an array
+            'order'       => 'integer'
+        ]);
+
+        $experience = $this->service->create($validated);
+        return response()->json($experience, 201);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function update(Request $request, Experience $experience): JsonResponse
     {
-        //
+        $validated = $request->validate([
+            'date'        => 'string',
+            'role'        => 'string',
+            'company'     => 'nullable|string',
+            'description' => 'nullable|string',
+            'tech'        => 'nullable|array',
+            'order'       => 'integer'
+        ]);
+
+        $this->service->update($experience, $validated);
+        return response()->json($experience);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Experience $experience)
+    public function destroy(Experience $experience): JsonResponse
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Experience $experience)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Experience $experience)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Experience $experience)
-    {
-        //
+        $this->service->delete($experience);
+        return response()->json(['message' => 'Experience removed']);
     }
 }

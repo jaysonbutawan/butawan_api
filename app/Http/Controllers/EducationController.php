@@ -5,62 +5,53 @@ namespace App\Http\Controllers;
 use App\Models\Education;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Services\EducationService;
+use Illuminate\Http\JsonResponse;
 
 class EducationController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+   public function __construct(
+        protected EducationService $service
+    ) {}
+
+    public function index(): JsonResponse
     {
-        //
+        return response()->json($this->service->getAll());
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function store(Request $request): JsonResponse
     {
-        //
+        $validated = $request->validate([
+            'year'   => 'required|string',
+            'degree' => 'required|string',
+            'school' => 'required|string',
+            'note'   => 'nullable|string',
+            'icon'   => 'nullable|string',
+            'order'  => 'integer'
+        ]);
+
+        $education = $this->service->create($validated);
+        return response()->json($education, 201);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function update(Request $request, Education $education): JsonResponse
     {
-        //
+        $validated = $request->validate([
+            'year'   => 'string',
+            'degree' => 'string',
+            'school' => 'string',
+            'note'   => 'nullable|string',
+            'icon'   => 'nullable|string',
+            'order'  => 'integer'
+        ]);
+
+        $this->service->update($education, $validated);
+        return response()->json($education);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Education $education)
+    public function destroy(Education $education): JsonResponse
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Education $education)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Education $education)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Education $education)
-    {
-        //
+        $this->service->delete($education);
+        return response()->json(['message' => 'Education record deleted']);
     }
 }

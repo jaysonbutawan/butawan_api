@@ -22,8 +22,8 @@ class ExperienceController extends Controller
     public function store(Request $request): JsonResponse
     {
         $validated = $request->validate([
-            'date'        => 'required|string',
-            'role'        => 'required|string',
+            'date'        => 'nullable|string',
+            'role'        => 'nullable|string',
             'company'     => 'nullable|string',
             'description' => 'nullable|string',
             'tech'        => 'nullable|array', // Laravel validates this as an array
@@ -37,8 +37,8 @@ class ExperienceController extends Controller
     public function update(Request $request, Experience $experience): JsonResponse
     {
         $validated = $request->validate([
-            'date'        => 'string',
-            'role'        => 'string',
+            'date'        => 'nullable|string',
+            'role'        => 'nullable|string',
             'company'     => 'nullable|string',
             'description' => 'nullable|string',
             'tech'        => 'nullable|array',

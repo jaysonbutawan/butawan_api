@@ -63,9 +63,10 @@ Route::prefix('butawan')->group(function () {
 
     Route::prefix('experiences')->name('experiences.')->group(function () {
         Route::get('/', [ExperienceController::class, 'index'])->name('index');
+        Route::post('/', [ExperienceController::class, 'store'])->name('store');
 
         Route::middleware('auth:sanctum')->group(function () {
-            Route::post('/', [ExperienceController::class, 'store'])->name('store');
+
             Route::put('{experience}', [ExperienceController::class, 'update'])->name('update');
             Route::delete('{experience}', [ExperienceController::class, 'destroy'])->name('destroy');
         });

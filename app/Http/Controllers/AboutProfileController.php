@@ -28,11 +28,11 @@ class AboutProfileController extends Controller
     public function update(Request $request): JsonResponse
     {
         $validated = $request->validate([
-            'section_label'      => 'string',
-            'heading_main'       => 'required|string',
-            'heading_highlight'  => 'required|string',
-            'description_top'    => 'required|string',
-            'description_bottom' => 'required|string',
+            'section_label'      => 'nullable|string',
+            'heading_main'       => 'nullable|string',
+            'heading_highlight'  => 'nullable|string',
+            'description_top'    => 'nullable|string',
+            'description_bottom' => 'nullable|string',
         ]);
 
         $profile = $this->service->updateProfile($validated);

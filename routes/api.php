@@ -24,20 +24,20 @@ Route::prefix('butawan')->group(function () {
     });
 
     Route::prefix('about-details')->name('about-details.')->group(function () {
-        Route::get('cards', [AboutDetailsCardController::class, 'index'])->name('cards.index');
+        Route::get('/', [AboutDetailsCardController::class, 'index'])->name('cards.index');
 
         Route::middleware('auth:sanctum')->group(function () {
-            Route::post('cards', [AboutDetailsCardController::class, 'store'])->name('cards.store');
-            Route::put('cards/{aboutDetailsCard}', [AboutDetailsCardController::class, 'update'])->name('cards.update');
-            Route::delete('cards/{aboutDetailsCard}', [AboutDetailsCardController::class, 'destroy'])->name('cards.destroy');
+            Route::post('/', [AboutDetailsCardController::class, 'store'])->name('cards.store');
+            Route::put('/{aboutDetailsCard}', [AboutDetailsCardController::class, 'update'])->name('cards.update');
+            Route::delete('/{aboutDetailsCard}', [AboutDetailsCardController::class, 'destroy'])->name('cards.destroy');
         });
     });
 
     Route::prefix('about-profile')->name('about-profile.')->group(function () {
-        Route::get('profile', [AboutProfileController::class, 'index'])->name('profile.index');
+        Route::get('/', [AboutProfileController::class, 'index'])->name('profile.index');
 
         Route::middleware('auth:sanctum')->group(function () {
-            Route::put('profile', [AboutProfileController::class, 'update'])->name('profile.update');
+            Route::put('/', [AboutProfileController::class, 'update'])->name('profile.update');
         });
     });
 

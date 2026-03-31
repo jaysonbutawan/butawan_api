@@ -11,15 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-      Schema::create('about_profiles', function (Blueprint $table) {
-        $table->id();
-        $table->string('section_label')->default('// About Me');
-        $table->string('heading_main');
-        $table->string('heading_highlight');
-        $table->text('description_top');
-        $table->text('description_bottom');
-        $table->timestamps();
-    });
+        Schema::create('about_profiles', function (Blueprint $table) {
+            $table->id();
+            $table->string('section_label')->nullable();
+            $table->string('heading_main')->nullable();
+            $table->string('heading_highlight')->nullable();
+            $table->text('description_top')->nullable();
+            $table->text('description_bottom')->nullable();
+            $table->timestamps();
+        });
     }
 
     /**

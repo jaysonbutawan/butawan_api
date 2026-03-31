@@ -22,8 +22,8 @@ class AboutDetailsCardController extends Controller
     public function store(Request $request): JsonResponse
     {
         $validated = $request->validate([
-            'label' => 'required|string',
-            'value' => 'required|string',
+            'label' => 'nullable|string',
+            'value' => 'nullable|string',
         ]);
 
         $card = $this->service->createCard($validated);
@@ -33,8 +33,8 @@ class AboutDetailsCardController extends Controller
     public function update(Request $request, AboutDetailsCard $aboutDetailsCard): JsonResponse
     {
         $validated = $request->validate([
-            'label' => 'string',
-            'value' => 'string',
+            'label' => 'nullable|string',
+            'value' => 'nullable|string',
         ]);
 
         $this->service->updateCard($aboutDetailsCard, $validated);

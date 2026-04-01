@@ -56,8 +56,8 @@ Route::prefix('butawan')->group(function () {
 
         Route::middleware('auth:sanctum')->group(function () {
             Route::post('/', [EducationController::class, 'store'])->name('store');
-            Route::put('{education}', [EducationController::class, 'update'])->name('update');
-            Route::delete('{education}', [EducationController::class, 'destroy'])->name('destroy');
+            Route::put('/{education}', [EducationController::class, 'update'])->name('update');
+            Route::delete('/{education}', [EducationController::class, 'destroy'])->name('destroy');
         });
     });
 
@@ -67,8 +67,8 @@ Route::prefix('butawan')->group(function () {
 
         Route::middleware('auth:sanctum')->group(function () {
 
-            Route::put('{experience}', [ExperienceController::class, 'update'])->name('update');
-            Route::delete('{experience}', [ExperienceController::class, 'destroy'])->name('destroy');
+            Route::put('/{experience}', [ExperienceController::class, 'update'])->name('update');
+            Route::delete('/{experience}', [ExperienceController::class, 'destroy'])->name('destroy');
         });
     });
 

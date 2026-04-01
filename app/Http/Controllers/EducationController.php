@@ -22,9 +22,9 @@ class EducationController extends Controller
     public function store(Request $request): JsonResponse
     {
         $validated = $request->validate([
-            'year'   => 'required|string',
-            'degree' => 'required|string',
-            'school' => 'required|string',
+            'year'   => 'nullable|string',
+            'degree' => 'nullable|string',
+            'school' => 'nullable|string',
             'note'   => 'nullable|string',
             'icon'   => 'nullable|string',
             'order'  => 'integer'
@@ -37,9 +37,9 @@ class EducationController extends Controller
     public function update(Request $request, Education $education): JsonResponse
     {
         $validated = $request->validate([
-            'year'   => 'string',
-            'degree' => 'string',
-            'school' => 'string',
+            'year'   => 'nullable|string',
+            'degree' => 'nullable|string',
+            'school' => 'nullable|string',
             'note'   => 'nullable|string',
             'icon'   => 'nullable|string',
             'order'  => 'integer'

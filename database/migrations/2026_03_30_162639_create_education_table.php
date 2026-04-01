@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('degree')->nullable();    // e.g., 'BS in Information Technology'
             $table->string('school')->nullable();    // e.g., 'Aces Tagum College'
             $table->text('note')->nullable();
-            $table->string('icon')->nullable();      // e.g., '🎓' or 'pi pi-graduation-cap'
+            $table->string('icon')->nullable();  
 
             $table->integer('order')->default(0); // For custom sorting
             $table->timestamps();

@@ -22,10 +22,9 @@ class ContactController extends Controller
     public function store(Request $request): JsonResponse
     {
         $validated = $request->validate([
-            'icon'  => 'required|string',
-            'label' => 'required|string',
-            'value' => 'required|string',
-            'href'  => 'required|string',
+            'label' => 'nullable|string',
+            'value' => 'nullable|string',
+            'href'  => 'nullable|string',
             'order' => 'integer'
         ]);
 
@@ -36,10 +35,10 @@ class ContactController extends Controller
     public function update(Request $request, Contact $contact): JsonResponse
     {
         $validated = $request->validate([
-            'icon'  => 'string',
-            'label' => 'string',
-            'value' => 'string',
-            'href'  => 'string',
+            'icon'  => 'nullable|string',
+            'label' => 'nullable|string',
+            'value' => 'nullable|string',
+            'href'  => 'nullable|string',
             'order' => 'integer'
         ]);
 

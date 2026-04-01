@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('projects', function (Blueprint $table) {
             $table->id();
-            $table->string('icon')->nullable();        // Emoji or Icon class
+            $table->longText('icon')->nullable();        // Emoji or Icon class
             $table->string('type')->nullable();        // e.g., 'Web Application'
             $table->string('title')->nullable();
             $table->text('description')->nullable();
